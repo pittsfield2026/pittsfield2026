@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP Documentation Form</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ── Base ─────────────────────────────────────── */
+:root {
+  --ink:       #1a1814;
+  --muted:     #6a6358;
+  --rule:      #d8d2c8;
+  --rule-lt:   #ece8e0;
+  --cream:     #f7f4ef;
+  --rust:      #b84a28;
+  --rust-bg:   #fdf1ec;
+  --rust-rule: #e8c0aa;
+  --teal:      #1a6b5a;
+  --teal-bg:   #eaf4f1;
+  --teal-rule: #aed4cc;
+  --navy:      #1c2b4a;
+  --page:      #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  color: var(--ink);
+  padding: 40px 24px 80px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Screen wrapper ───────────────────────────── */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--page);
+  border-radius: 4px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+  padding: 56px 64px 72px;
+}
+
+/* ── Header ───────────────────────────────────── */
+.doc-header {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 24px;
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 10px;
+}
+
+.doc-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 38px;
+  line-height: 1.1;
+  color: var(--ink);
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.doc-title em { font-style: italic; color: var(--rust); }
+
+/* Meta row */
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.meta-cell {
+  padding: 10px 14px;
+  border-right: 1px solid var(--rule);
+}
+.meta-cell:last-child { border-right: none; }
+
+.meta-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.meta-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  background: transparent;
+  padding: 0;
+  min-height: 20px;
+}
+
+.meta-input::placeholder { color: var(--rule); font-style: italic; }
+
+/* ── Section ──────────────────────────────────── */
+.section {
+  margin-bottom: 36px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--page);
+  background: var(--rust);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.divider {
+  height: 1px;
+  background: var(--rule-lt);
+  margin-bottom: 12px;
+}
+
+/* Example callout */
+.example {
+  background: var(--rust-bg);
+  border-left: 3px solid var(--rust-rule);
+  padding: 9px 13px;
+  margin-bottom: 10px;
+  border-radius: 0 3px 3px 0;
+}
+.example-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 4px;
+  display: block;
+}
+.example-text {
+  font-size: 12.5px;
+  color: #8a4428;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Tip callout */
+.tip {
+  background: var(--teal-bg);
+  border-left: 3px solid var(--teal-rule);
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 0 3px 3px 0;
+}
+.tip-text {
+  font-size: 12px;
+  color: var(--teal);
+  line-height: 1.55;
+}
+
+/* Answer area — grows with content */
+.answer {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--rule);
+  outline: none;
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: transparent;
+  padding: 6px 0 6px;
+  resize: none;
+  overflow: hidden;
+  display: block;
+  min-height: 34px;
+  line-height: 1.6;
+}
+
+.answer::placeholder { color: var(--rule); font-style: italic; font-size: 13px; }
+.answer:focus { border-bottom-color: var(--rust); outline: none; }
+
+/* Multi-line answer */
+.answer-multi {
+  min-height: 80px;
+  border: 1.5px solid var(--rule);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.answer-multi:focus { border-color: var(--rust); }
+
+/* ── Two-column layout ────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* ── Steps ────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 4px; }
+
+.step-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.step-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--page);
+  background: var(--navy);
+  border-radius: 3px;
+  padding: 4px 7px;
+  flex-shrink: 0;
+  margin-top: 6px;
+  line-height: 1;
+}
+
+.step-input {
+  flex: 1;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px dashed var(--rule);
+  border-radius: 3px;
+  padding: 7px 14px;
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  font-size: 12.5px;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.15s;
+  width: 100%;
+}
+.add-btn:hover { border-color: var(--rust); color: var(--rust); background: var(--rust-bg); }
+
+/* ── Decision table ───────────────────────────── */
+.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+.decision-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--cream);
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  text-align: left;
+  font-weight: 500;
+}
+.decision-table td {
+  border: 1px solid var(--rule);
+  padding: 0;
+}
+.decision-table td input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 9px 12px;
+  background: transparent;
+}
+.decision-table td input:focus { background: var(--rust-bg); }
+.decision-table td input::placeholder { color: var(--rule-lt); font-style: italic; }
+
+/* ── Quality checklist ────────────────────────── */
+.check-list { display: flex; flex-direction: column; gap: 6px; }
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.check-box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--rule);
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+}
+.check-box.checked {
+  background: var(--rust);
+  border-color: var(--rust);
+}
+.check-box.checked::after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+/* ── Sign-off ─────────────────────────────────── */
+.signoff {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-top: 40px;
+  background: var(--cream);
+}
+
+.signoff-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.signoff-field {}
+
+.signoff-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.signoff-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  outline: none;
+  background: transparent;
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 4px 0;
+  min-height: 24px;
+}
+.signoff-input:focus { border-bottom-color: var(--rust); }
+.signoff-input::placeholder { color: var(--rule); font-style: italic; }
+
+/* ── Toolbar (screen only) ────────────────────── */
+.toolbar {
+  max-width: 720px;
+  margin: 0 auto 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 9px 20px;
+  border-radius: 4px;
+  font-family: 'Instrument Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: white;
+  border: none;
+}
+.btn-primary:hover { background: var(--rust); }
+
+.btn-secondary {
+  background: white;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.btn-secondary:hover { border-color: var(--ink); }
+
+/* ── PRINT STYLES ─────────────────────────────── */
+@media print {
+
+  @page {
+    margin: 18mm 18mm 18mm 18mm;
+    size: letter portrait;
+  }
+
+  body {
+    background: white;
+    padding: 0;
+    font-size: 11pt;
+  }
+
+  .toolbar { display: none !important; }
+
+  .page {
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* Header */
+  .doc-header {
+    border-bottom: 1.5pt solid black;
+    padding-bottom: 14pt;
+    margin-bottom: 22pt;
+  }
+
+  .eyebrow {
+    font-size: 7pt;
+    color: #b84a28;
+    letter-spacing: 0.14em;
+  }
+
+  .doc-title { font-size: 26pt; margin-bottom: 12pt; }
+  .doc-title em { color: #b84a28; }
+
+  /* Meta */
+  .meta-grid {
+    border: 0.75pt solid #aaa;
+    page-break-inside: avoid;
+  }
+  .meta-cell { padding: 7pt 10pt; border-right: 0.75pt solid #aaa; }
+  .meta-label { font-size: 7pt; color: #666; }
+
+  /* Inputs become plain text lines */
+  .meta-input,
+  .answer,
+  .step-row .answer,
+  .signoff-input {
+    border: none !important;
+    border-bottom: 0.5pt solid #aaa !important;
+    background: transparent !important;
+    font-size: 10.5pt;
+    color: black;
+    padding: 4pt 0;
+    resize: none;
+    outline: none;
+    -webkit-appearance: none;
+    box-shadow: none;
+  }
+
+  /* Multi-line answer in print */
+  .answer-multi {
+    border: 0.5pt solid #aaa !important;
+    min-height: 60pt;
+    padding: 6pt 8pt !important;
+  }
+
+  /* Hide placeholders */
+  ::placeholder { color: transparent !important; }
+  :-ms-input-placeholder { color: transparent !important; }
+
+  /* Hide add buttons */
+  .add-btn { display: none !important; }
+
+  /* Section headings */
+  .section { margin-bottom: 18pt; page-break-inside: avoid; }
+  .section-num {
+    width: 18pt;
+    height: 18pt;
+    font-size: 8pt;
+    background: #b84a28 !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .section-title { font-size: 15pt; }
+  .divider { background: #ddd; margin-bottom: 8pt; }
+
+  /* Examples — kept but subtle in print */
+  .example {
+    background: #fdf1ec !important;
+    border-left: 2pt solid #e8c0aa !important;
+    padding: 6pt 10pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .example-lbl { font-size: 7pt; }
+  .example-text { font-size: 10pt; }
+
+  .tip {
+    background: #eaf4f1 !important;
+    border-left: 2pt solid #aed4cc !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tip-text { font-size: 10pt; }
+
+  /* Steps */
+  .step-num {
+    background: #1c2b4a !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 8pt;
+    padding: 3pt 5pt;
+    margin-top: 4pt;
+  }
+
+  /* Decision table */
+  .decision-table th {
+    background: #f0ece4 !important;
+    font-size: 7pt;
+    padding: 5pt 8pt;
+    border: 0.5pt solid #aaa;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .decision-table td {
+    border: 0.5pt solid #aaa;
+    min-height: 24pt;
+    height: 24pt;
+  }
+  .decision-table td input {
+    font-size: 10.5pt;
+    padding: 4pt 8pt;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* Checkboxes */
+  .check-box {
+    border: 1pt solid #888 !important;
+    width: 12pt;
+    height: 12pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .check-box.checked {
+    background: #b84a28 !important;
+    border-color: #b84a28 !important;
+  }
+
+  /* Sign-off */
+  .signoff {
+    background: #f7f4ef !important;
+    border: 0.75pt solid #aaa !important;
+    padding: 12pt 16pt;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page breaks */
+  .section:nth-child(5) { page-break-before: auto; }
+  .signoff { margin-top: 20pt; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Toolbar (screen only) -->
+<div class="toolbar">
+  <button class="btn btn-secondary" onclick="clearForm()">Clear form</button>
+  <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="eyebrow">Standard Operating Procedure</div>
+    <div class="doc-title">Process <em>Documentation</em> Form</div>
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <span class="meta-label">Process name</span>
+        <input class="meta-input" type="text" placeholder="e.g. Onboard a new client" data-key="meta-name">
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Owner</span>
+        <input class="meta-input" type="text" placeholder="Your name" data-key="meta-owner">
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Department</span>
+        <input class="meta-input" type="text" placeholder="e.g. Operations" data-key="meta-dept">
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Date &amp; version</span>
+        <input class="meta-input" type="text" placeholder="May 2026 · v1.0" data-key="meta-date">
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 Purpose -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <div class="section-title">Purpose</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">This process ensures every new client receives a consistent, professional welcome and has everything they need within 24 hours of signing.</span>
+    </div>
+    <textarea class="answer answer-multi" rows="3" placeholder="Why does this process exist? What problem does it solve? (1–2 sentences)" data-key="purpose" oninput="autoResize(this)"></textarea>
+  </div>
+
+  <!-- 02 & 03 -->
+  <div class="two-col">
+
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">02</div>
+        <div class="section-title">Trigger</div>
+      </div>
+      <div class="divider"></div>
+      <div class="example">
+        <span class="example-lbl">Example</span>
+        <span class="example-text">Client signs the proposal in PandaDoc · Invoice goes 7 days past due · New order placed</span>
+      </div>
+      <div class="tip"><span class="tip-text">↳ Be specific. Vague triggers like "when needed" mean the process gets skipped.</span></div>
+      <textarea class="answer" rows="2" placeholder="What specific event kicks this off?" data-key="trigger" oninput="autoResize(this)"></textarea>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">03</div>
+        <div class="section-title">Done when</div>
+      </div>
+      <div class="divider"></div>
+      <div class="example">
+        <span class="example-lbl">Example</span>
+        <span class="example-text">Client has logged into the portal, received welcome email, and kickoff call is booked on both calendars.</span>
+      </div>
+      <div class="tip"><span class="tip-text">↳ Define a clear finish line — without it, people guess whether the task is complete.</span></div>
+      <textarea class="answer" rows="2" placeholder="What does 'complete' look like?" data-key="done-when" oninput="autoResize(this)"></textarea>
+    </div>
+
+  </div>
+
+  <!-- 04 Tools -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">04</div>
+      <div class="section-title">Tools &amp; systems needed</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">Gmail &nbsp;·&nbsp; QuickBooks &nbsp;·&nbsp; Notion &nbsp;·&nbsp; Calendly &nbsp;·&nbsp; Google Drive &nbsp;·&nbsp; company CRM</span>
+    </div>
+    <textarea class="answer" rows="1" placeholder="List the tools, software, or systems required to complete this process" data-key="tools" oninput="autoResize(this)"></textarea>
+  </div>
+
+  <!-- 05 Steps -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">05</div>
+      <div class="section-title">Step-by-step instructions</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">1. Open QuickBooks → Invoices → New Invoice &nbsp; 2. Select the client from the dropdown &nbsp; 3. Enter line items from the project scope &nbsp; 4. Set due date to 14 days from today &nbsp; 5. Click Send — confirm client email address first</span>
+    </div>
+    <div class="tip"><span class="tip-text">↳ Start each step with an action verb: Open · Click · Copy · Email · Check · Navigate · Enter · Confirm</span></div>
+    <div class="steps" id="steps-list">
+      <div class="step-row"><span class="step-num">01</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Start with an action verb — e.g. 'Open the client folder in Google Drive'" data-key="step-1" oninput="autoResize(this)"></textarea></div></div>
+      <div class="step-row"><span class="step-num">02</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-2" oninput="autoResize(this)"></textarea></div></div>
+      <div class="step-row"><span class="step-num">03</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-3" oninput="autoResize(this)"></textarea></div></div>
+      <div class="step-row"><span class="step-num">04</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-4" oninput="autoResize(this)"></textarea></div></div>
+      <div class="step-row"><span class="step-num">05</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-5" oninput="autoResize(this)"></textarea></div></div>
+      <div class="step-row"><span class="step-num">06</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-6" oninput="autoResize(this)"></textarea></div></div>
+      <div class="step-row"><span class="step-num">07</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-7" oninput="autoResize(this)"></textarea></div></div>
+    </div>
+    <button class="add-btn" onclick="addStep()">+ Add another step</button>
+  </div>
+
+  <!-- 06 Decision Points -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">06</div>
+      <div class="section-title">Decision points &amp; edge cases</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">If the client doesn't respond in 48 hrs → send one follow-up email using the Notion template, then flag for account manager<br>If payment fails → log in CRM, notify owner via Slack, do not re-attempt automatically</span>
+    </div>
+    <div class="tip"><span class="tip-text">↳ Think about what can go wrong or what exceptions exist. These "if/then" moments are where undocumented processes break down.</span></div>
+    <table class="decision-table">
+      <thead>
+        <tr>
+          <th style="width:46%">IF this happens…</th>
+          <th style="width:54%">THEN do this…</th>
+        </tr>
+      </thead>
+      <tbody id="decision-body">
+        <tr><td><input type="text" placeholder="e.g. Client doesn't respond in 48 hrs" data-key="if-1"></td><td><input type="text" placeholder="e.g. Send follow-up, flag for account manager" data-key="then-1"></td></tr>
+        <tr><td><input type="text" placeholder="e.g. Payment fails" data-key="if-2"></td><td><input type="text" placeholder="e.g. Log in CRM, notify owner via Slack" data-key="then-2"></td></tr>
+        <tr><td><input type="text" placeholder="" data-key="if-3"></td><td><input type="text" placeholder="" data-key="then-3"></td></tr>
+      </tbody>
+    </table>
+    <button class="add-btn" onclick="addDecisionRow()">+ Add another scenario</button>
+  </div>
+
+  <!-- 07 Quality Check -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">07</div>
+      <div class="section-title">Quality check before closing</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">Confirm welcome email was delivered (check for bounce) · Portal login is working · Kickoff call appears on both calendars</span>
+    </div>
+    <div class="tip"><span class="tip-text">↳ What should someone verify before marking this done? A simple checklist prevents the most common mistakes.</span></div>
+    <div class="check-list" id="check-list">
+      <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><div class="step-input"><textarea class="answer" rows="1" placeholder="Check item..." oninput="autoResize(this)"></textarea></div></div>
+      <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><div class="step-input"><textarea class="answer" rows="1" placeholder="Check item..." oninput="autoResize(this)"></textarea></div></div>
+      <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><div class="step-input"><textarea class="answer" rows="1" placeholder="Check item..." oninput="autoResize(this)"></textarea></div></div>
+      <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><div class="step-input"><textarea class="answer" rows="1" placeholder="Check item..." oninput="autoResize(this)"></textarea></div></div>
+    </div>
+    <button class="add-btn" onclick="addCheckItem()">+ Add check item</button>
+  </div>
+
+  <!-- 08 Escalation -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">08</div>
+      <div class="section-title">Escalation &amp; who to contact</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">If you can't resolve a client complaint within 30 minutes, escalate to Sarah (Operations Lead) via Slack. For billing disputes over $500, loop in the owner directly.</span>
+    </div>
+    <textarea class="answer answer-multi" rows="3" placeholder="Who does someone contact if they're stuck or something falls outside the normal scenario?" data-key="escalation" oninput="autoResize(this)"></textarea>
+  </div>
+
+  <!-- 09 Notes -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">09</div>
+      <div class="section-title">Notes &amp; insider tips</div>
+    </div>
+    <div class="divider"></div>
+    <div class="example">
+      <span class="example-lbl">Example</span>
+      <span class="example-text">Clients often confuse the portal login with their personal email — always confirm during kickoff. The contract template in Google Drive updates quarterly; always use the most recent version.</span>
+    </div>
+    <div class="tip"><span class="tip-text">↳ What do you know from doing this repeatedly that a new person wouldn't? Shortcuts, common mistakes, context — this is often the most valuable section.</span></div>
+    <textarea class="answer answer-multi" rows="4" placeholder="Add anything a new person would wish they knew before starting..." data-key="notes" oninput="autoResize(this)"></textarea>
+  </div>
+
+  <!-- Sign-off -->
+  <div class="signoff">
+    <div class="section-head" style="margin-bottom:14px;">
+      <div class="section-num" style="background:var(--navy);">10</div>
+      <div class="section-title">Sign-off</div>
+    </div>
+    <div class="signoff-grid">
+      <div class="signoff-field">
+        <span class="signoff-label">Submitted by</span>
+        <input class="signoff-input" type="text" placeholder="Full name" data-key="sig-by">
+      </div>
+      <div class="signoff-field">
+        <span class="signoff-label">Reviewed by</span>
+        <input class="signoff-input" type="text" placeholder="Team lead / manager" data-key="sig-reviewed">
+      </div>
+      <div class="signoff-field">
+        <span class="signoff-label">Date submitted</span>
+        <input class="signoff-input" type="text" placeholder="e.g. May 2026" data-key="sig-date">
+      </div>
+      <div class="signoff-field">
+        <span class="signoff-label">Version</span>
+        <input class="signoff-input" type="text" placeholder="v1.0" data-key="sig-ver">
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ── Auto-resize textareas ──────────────────────
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
+
+document.querySelectorAll('textarea').forEach(ta => {
+  ta.addEventListener('input', () => autoResize(ta));
+});
+
+// ── Add step ───────────────────────────────────
+let stepCount = 7;
+function addStep() {
+  stepCount++;
+  const n = stepCount.toString().padStart(2, '0');
+  const row = document.createElement('div');
+  row.className = 'step-row';
+  row.innerHTML = `<span class="step-num">${n}</span><div class="step-input"><textarea class="answer" rows="1" placeholder="Next action..." data-key="step-${stepCount}" oninput="autoResize(this)"></textarea></div>`;
+  document.getElementById('steps-list').appendChild(row);
+  const ta = row.querySelector('textarea');
+  ta.addEventListener('input', () => autoResize(ta));
+  ta.focus();
+  saveAll();
+}
+
+// ── Add decision row ───────────────────────────
+let decCount = 3;
+function addDecisionRow() {
+  decCount++;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><input type="text" placeholder="If..." data-key="if-${decCount}"></td><td><input type="text" placeholder="Then..." data-key="then-${decCount}"></td>`;
+  document.getElementById('decision-body').appendChild(tr);
+  tr.querySelector('input').focus();
+  attachSave(tr.querySelectorAll('input'));
+  saveAll();
+}
+
+// ── Add check item ─────────────────────────────
+function addCheckItem() {
+  const row = document.createElement('div');
+  row.className = 'check-row';
+  row.innerHTML = `<div class="check-box" onclick="toggleCheck(this)"></div><div class="step-input"><textarea class="answer" rows="1" placeholder="Check item..." oninput="autoResize(this)"></textarea></div>`;
+  document.getElementById('check-list').appendChild(row);
+  const ta = row.querySelector('textarea');
+  ta.addEventListener('input', () => autoResize(ta));
+  ta.focus();
+}
+
+// ── Checkbox toggle ────────────────────────────
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+// ── Persistence (localStorage) ─────────────────
+function saveAll() {
+  const data = {};
+  document.querySelectorAll('[data-key]').forEach(el => {
+    data[el.dataset.key] = el.value;
+  });
+  try { localStorage.setItem('sop_form', JSON.stringify(data)); } catch(e) {}
+}
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem('sop_form');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.entries(data).forEach(([k, v]) => {
+      const el = document.querySelector(`[data-key="${k}"]`);
+      if (el) {
+        el.value = v;
+        if (el.tagName === 'TEXTAREA') autoResize(el);
+      }
+    });
+  } catch(e) {}
+}
+
+function attachSave(els) {
+  els.forEach(el => el.addEventListener('input', saveAll));
+}
+
+function clearForm() {
+  if (!confirm('Clear all answers and start fresh?')) return;
+  document.querySelectorAll('[data-key]').forEach(el => { el.value = ''; });
+  document.querySelectorAll('textarea').forEach(ta => { ta.style.height = 'auto'; });
+  try { localStorage.removeItem('sop_form'); } catch(e) {}
+}
+
+// Init
+attachSave(document.querySelectorAll('[data-key]'));
+loadSaved();
+</script>
+</body>
+</html>
